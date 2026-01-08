@@ -1,15 +1,48 @@
 gnb_id: 411
 gnb_id_bit_length: 32
 
-amf:
-  addr: 192.168.1.1
-  bind_addr: 192.168.1.2
+cu_cp:
+  amf:
+    addr: 192.168.1.1
+    bind_addr: 192.168.1.2
+    supported_tracking_areas:
+      - tac: 1                        
+        plmn_list:
+          - plmn: "99999"
+            tai_slice_support_list:
+              - sst: 1    
+                sd: 1
+
+  mobility:
+    trigger_handover_from_measurements: true
+    cells:
+      - nr_cell_id: 0x19B0
+        periodic_report_cfg_id: 1
+        ncells:
+          - nr_cell_id: 0x19B1
+            report_configs: [ 2 ]
+      - nr_cell_id: 0x19B1
+        periodic_report_cfg_id: 1
+        ncells:
+          - nr_cell_id: 0x19B0
+            report_configs: [ 2 ]
+    report_configs:
+      - report_cfg_id: 1
+        report_type: periodical
+        report_interval_ms: 480
+      - report_cfg_id: 2
+        report_type: event_triggered
+        event_triggered_report_type: a3
+        meas_trigger_quantity: rsrp
+        meas_trigger_quantity_offset_db: 3
+        hysteresis_db: 0
+        time_to_trigger_ms: 100
 
 ru_sdr:
   device_driver: uhd
   device_args: type=x300
   tx_gain: 30
-  rx_gain: 30
+  rx_gain: 20
   srate: 92.16
   lo_offset: 45
   clock: internal
@@ -35,31 +68,6 @@ cells:
     pci: 2
     prach:
       prach_root_sequence_index: 64
-
-cu_cp:
-  mobility:
-    trigger_handover_from_measurements: true
-    cells:
-      - nr_cell_id: 0x19B0
-        periodic_report_cfg_id: 1
-        ncells:
-          - nr_cell_id: 0x19B1
-            report_configs: [ 2 ]
-      - nr_cell_id: 0x19B1
-        periodic_report_cfg_id: 1
-        ncells:
-          - nr_cell_id: 0x19B0
-            report_configs: [ 2 ]
-    report_configs:
-      - report_cfg_id: 1
-        report_type: periodical
-        report_interval_ms: 480
-      - report_cfg_id: 2
-        report_type: event_triggered
-        a3_report_type: rsrp
-        a3_offset_db: 3
-        a3_hysteresis_db: 0
-        a3_time_to_trigger_ms: 100
 
 log:
   all_level: info

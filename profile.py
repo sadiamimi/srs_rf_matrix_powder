@@ -40,8 +40,7 @@ gNB:
 ```
 # on the cudu node
 sudo numactl --membind 0 --cpubind 0 \
-  /var/tmp/srsRAN_Project/build/apps/gnb/gnb -c /var/tmp/etc/srsran/gnb_rf_x310_ho.yml \
-  -c /var/tmp/etc/srsran/slicing.yml
+  /var/tmp/srsRAN_Project/build/apps/gnb/gnb -c /var/tmp/etc/srsran/gnb_rf_x310_ho.yml
 ```
 
 In a session on the `ue1` node, start the UE connection manager with the target DNN `internet` in `ipv4` mode:
@@ -121,7 +120,7 @@ ETC_PATH = "/local/repository/etc"
 UBUNTU_IMG = "urn:publicid:IDN+emulab.net+image+emulab-ops//UBUNTU22-64-STD"
 COTS_UE_IMG = "urn:publicid:IDN+emulab.net+image+PowderTeam:cots-jammy-image"
 COMP_MANAGER_ID = "urn:publicid:IDN+emulab.net+authority+cm"
-DEFAULT_SRSRAN_HASH = "a15950301c5f3a1a166b79bb6c9ee901a4e8c2dd"
+DEFAULT_SRSRAN_HASH = "release_25_10"
 OPEN5GS_DEPLOY_SCRIPT = os.path.join(BIN_PATH, "deploy-open5gs.sh")
 SRSRAN_DEPLOY_SCRIPT = os.path.join(BIN_PATH, "deploy-srsran.sh")
 NODE_IDS = {
