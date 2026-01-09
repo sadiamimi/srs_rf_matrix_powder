@@ -34,7 +34,14 @@ sudo apt-get install -y \
 cd $SRCDIR
 git clone $SRS_PROJECT_REPO
 cd srsRAN_Project
-git checkout $COMMIT_HASH
+# If commit hash is provided, checkout that specific commit
+# Otherwise, use the latest commit from the default branch
+if [ ! -z "$COMMIT_HASH" ]; then
+  echo "Checking out specific commit: $COMMIT_HASH"
+  git checkout $COMMIT_HASH
+else
+  echo "Using latest commit from default branch"
+fi
 mkdir build
 cd build
 cmake ../
