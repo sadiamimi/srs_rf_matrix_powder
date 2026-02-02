@@ -58,6 +58,8 @@ cell_cfg:
   nof_antennas_ul: 1
   plmn: "99999"
   tac: 1
+  srs:
+    srs_period_ms: 40
 
 cells:
   -
